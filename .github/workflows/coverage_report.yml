@@ -62,17 +62,30 @@ jobs:
           path: "**/target/**/TEST-*.xml"
           reporter: java-junit
 
+      - name: Makey JaCoCo Report
+        uses: madrapps/jacoco-report@db72e7e7c96f98d239967958b0a0a6ca7d3bb45f # v1.6.1
+        if: success()  # run only if previous steps succeeded and it is a PR
+        with:
+          paths: "target/jacoco.xml"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: 🤖 Java Code Coverage
+          min-coverage-overall: ${{ env.min-coverage-overall }}
+          update-comment: ${{ env.update-comment }}
+          pass-emoji: ${{ env.pass-emoji }}
+          fail-emoji: ${{ env.fail-emoji }}
+
       - name: Package relevant files
         run: |
           pwd
           ls -la target
           mkdir results
           find . -name TEST-*.xml -exec cp {} ./results \;
-
+          mv target/jacoco.xml ./results
           echo " **** FILES INSIDE REPORT ARE: ****"
           ls -la ./results
           touch index.html
           echo "<h1>Test Results</h1>" >> index.html
+          cat index.html ./results/TEST-*.xml >> index.html
           mv index.html ./results
 
       - name: Setup Pages

@@ -64,10 +64,13 @@ jobs:
 
       - name: Package relevant files
         run: |
-          mkdir app/target/coverage_report/
-          cp -R app/target/**/TEST-*.xml app/target/coverage_report/
+          pwd
+          ls -la
+          mkdir results
+          cp -R **/target/**/TEST-*.xml results/
+
           echo " **** FILES INSIDE REPORT ARE: ****"
-          ls -la app/target/coverage_report
+          ls -la ./results
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -75,7 +78,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         id: deployment
         with:
-          path: "app/target/coverage_report"
+          path: "./results"
 
   # Publish to GH pages
   deploy:

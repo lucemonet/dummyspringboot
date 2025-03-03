@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
 
   push:
-    branches: master
 
 
 permissions:
@@ -15,74 +14,74 @@ permissions:
   id-token: write
 
 jobs:
-  env:
-    timezone:
-      required: false
-      type: string
-    java-version:
-      required: false
-      default: "21"
-      type: string
-    java-distribution:
-      required: false
-      default: "temurin"
-      type: string
-    min-coverage-overall:
-      required: false
-      default: 80
-      type: number
-    packages-user-name:
-      required: true
-      type: string
-      description: "GitHub user name, owner of token."
-    pass-emoji:
-      required: false
-      default: ✔️
-      type: string
-    fail-emoji:
-      required: false
-      default: 🥺
-      type: string
-    maven-settings-file-path:
-      required: false
-      default: settings.xml
-      type: string
-    working-directory:
-      required: false
-      default: .
-      type: string
-  #    secrets:
-  #      packages-user-token:
-  #        required: true
-  #        description: "GitHub PAT for the user with correct permissions to do build."
   build-test:
+    env:
+      timezone:
+        required: false
+        type: string
+      java-version:
+        required: false
+        default: "21"
+        type: string
+      java-distribution:
+        required: false
+        default: "temurin"
+        type: string
+      min-coverage-overall:
+        required: false
+        default: 80
+        type: number
+      packages-user-name:
+        required: true
+        type: string
+        description: "GitHub user name, owner of token."
+      pass-emoji:
+        required: false
+        default: ✔️
+        type: string
+      fail-emoji:
+        required: false
+        default: 🥺
+        type: string
+      maven-settings-file-path:
+        required: false
+        default: settings.xml
+        type: string
+      working-directory:
+        required: false
+        default: .
+        type: string
+        secrets:
+          packages-user-token:
+            required: true
+            description: "GitHub PAT for the user with correct permissions to do build."
     environment:
       name: github-pages-deploy
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-22.04
     defaults:
       run:
-        working-directory: ${{ inputs.working-directory }}
+        working-directory: ${{ env.working-directory }}
         shell: bash
 
     steps:
-      - if: ${{ inputs.timezone != '' }}
-        name: Set timezone to ${{ inputs.timezone }}
+      - if: ${{ env.timezone != '' }}
+        name: Set timezone to ${{ env.timezone }}
         run: |
-          sudo timedatectl set-timezone ${{ inputs.timezone }}
+          sudo timedatectl set-timezone ${{ env.timezone }}
 
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
-          java-version: ${{ inputs.java-version }}
-          distribution: ${{ inputs.java-distribution }}
+          java-version: ${{ env.java-version }}
+          distribution: ${{ env.java-distribution }}
           cache: "maven"
 
       - name: Build & Run Tests
         env:
-          PACKAGES_USER_NAME: ${{ inputs.packages-user-name }}
+          PACKAGES_USER_NAME: ${{ env.packages-user-name }}
           PACKAGES_USER_TOKEN: ${{ secrets.packages-user-token}}
-        run: mvn --settings ${{ inputs.maven-settings-file-path }} clean verify --no-transfer-progress
+        run: mvn --settings ${{ env.maven-settings-file-path }} clean verify --no-transfer-progress
 
       - name: Publish Tests Report
         uses: dorny/test-reporter@afe6793191b75b608954023a46831a3fe10048d4 # v1.7.0

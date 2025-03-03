@@ -65,9 +65,9 @@ jobs:
       - name: Package relevant files
         run: |
           pwd
-          ls -la
+          ls -la target
           mkdir results
-          cp -R **/target/**/TEST-*.xml results/
+          find . -name TEST-*.xml -exec cp {} ./results \;
 
           echo " **** FILES INSIDE REPORT ARE: ****"
           ls -la ./results

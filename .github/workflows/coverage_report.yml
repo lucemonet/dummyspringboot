@@ -16,45 +16,20 @@ permissions:
 jobs:
   build-test:
     env:
-      timezone:
-        required: false
-        type: string
-      java-version:
-        required: false
-        default: "21"
-        type: string
-      java-distribution:
-        required: false
-        default: "temurin"
-        type: string
-      min-coverage-overall:
-        required: false
-        default: 80
-        type: number
-      packages-user-name:
-        required: true
-        type: string
-        description: "GitHub user name, owner of token."
-      pass-emoji:
-        required: false
-        default: ✔️
-        type: string
-      fail-emoji:
-        required: false
-        default: 🥺
-        type: string
-      maven-settings-file-path:
-        required: false
-        default: settings.xml
-        type: string
-      working-directory:
-        required: false
-        default: .
-        type: string
-        secrets:
-          packages-user-token:
-            required: true
-            description: "GitHub PAT for the user with correct permissions to do build."
+      java-version: "21"
+      java-distribution: "temurin"
+      min-coverage-overall: 80
+      packages-user-name: "lucemonet"
+      pass-emoji: "✔️"
+
+      fail-emoji: "🥺"
+
+      maven-settings-file-path: "settings.xml"
+      working-directory: "."
+      secrets:
+        packages-user-token:
+          required: true
+          description: "GitHub PAT for the user with correct permissions to do build."
     environment:
       name: github-pages-deploy
       url: ${{ steps.deployment.outputs.page_url }}

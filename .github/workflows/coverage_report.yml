@@ -26,10 +26,6 @@ jobs:
 
       maven-settings-file-path: "settings.xml"
       working-directory: "."
-      secrets:
-        packages-user-token:
-          required: true
-          description: "GitHub PAT for the user with correct permissions to do build."
     environment:
       name: github-pages-deploy
       url: ${{ steps.deployment.outputs.page_url }}
@@ -55,7 +51,7 @@ jobs:
       - name: Build & Run Tests
         env:
           PACKAGES_USER_NAME: ${{ env.packages-user-name }}
-          PACKAGES_USER_TOKEN: ${{ secrets.packages-user-token}}
+          PACKAGES_USER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn --settings ${{ env.maven-settings-file-path }} clean verify --no-transfer-progress
 
       - name: Publish Tests Report

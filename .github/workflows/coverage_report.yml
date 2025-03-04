@@ -80,7 +80,7 @@ jobs:
           pwd
           mkdir results
           find . -name TEST-*.xml -exec cp {} ./results \;
-          cp ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml ./results
+#          cp ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml ./results
 
           touch index.html
           echo "<h1>Test Results</h1>" >> index.html

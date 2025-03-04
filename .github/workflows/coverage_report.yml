@@ -78,18 +78,16 @@ jobs:
       - name: Package relevant files
         run: |
           pwd
-          ls -la target
           mkdir results
           find . -name TEST-*.xml -exec cp {} ./results \;
           cp ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml ./results
 
           touch index.html
           echo "<h1>Test Results</h1>" >> index.html
-          cat .results/jacoco.xml ./results/TEST-*.xml >> index.html
-          echo "Jacoco file contains:"
-          cat ./results/jacoco.xml          
-          echo "Results contains:"
-          ls -la ./results
+          cat ./results/TEST-*.xml >> index.html
+      
+          echo " ${{ github.workspace }}/build/reports/jacoco/testCoverage/ contains:"
+          ls -la  ${{ github.workspace }}/build/reports/jacoco/testCoverage/
           mv index.html ./results
 
       - name: Setup Pages

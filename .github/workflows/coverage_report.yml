@@ -74,6 +74,11 @@ jobs:
           pass-emoji: ${{ env.pass-emoji }}
           fail-emoji: ${{ env.fail-emoji }}
           debug-mode: 'true'
+      - name: Generate JaCoCo Badge
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+            jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
+            badges-directory: build/reports/jacoco/test/html/badges
 
       - name: Package relevant files
         run: |

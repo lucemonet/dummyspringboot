@@ -81,7 +81,7 @@ jobs:
           mkdir results
           find . -name TEST-*.xml -exec cp {} ./results \;
       
-          mv ${{ github.workspace }}/target/site/* ./results
+          mv ${{ github.workspace }}/target/site/jacoco/* ./results
           echo " results contains:"
           ls -la  results/
 

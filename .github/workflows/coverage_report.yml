@@ -66,7 +66,7 @@ jobs:
         uses: madrapps/jacoco-report@db72e7e7c96f98d239967958b0a0a6ca7d3bb45f # v1.6.1
         if: success()  # run only if previous steps succeeded and it is a PR
         with:
-          paths: ${{ github.workspace }}/build/reports/jacoco/testCoverage/jacoco.xml
+          paths: ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           title: 🤖 Java Code Coverage
           min-coverage-overall: ${{ env.min-coverage-overall }}
@@ -81,7 +81,7 @@ jobs:
           ls -la target
           mkdir results
           find . -name TEST-*.xml -exec cp {} ./results \;
-          cp  ${{ github.workspace }}/build/reports/jacoco/testCoverage/jacoco.xml ./results
+          cp ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml ./results
 
           touch index.html
           echo "<h1>Test Results</h1>" >> index.html

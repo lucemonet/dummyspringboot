@@ -66,7 +66,7 @@ jobs:
         uses: madrapps/jacoco-report@v1.7.1 # v1.6.1
         if: success()
         with:
-          paths: ${{ github.workspace }}/testCoverage-*.xml
+          paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           title: 🤖 Java Code Coverage
           min-coverage-overall: ${{ env.min-coverage-overall }}
@@ -87,7 +87,7 @@ jobs:
       
           echo " ${{ github.workspace }}/ contains:"
           ls -la  ${{ github.workspace }}/
-          ls -la  ${{ github.workspace }}/target/
+          ls -la  ${{ github.workspace }}/target/site/jacoco/
           mv index.html ./results
 
       - name: Setup Pages

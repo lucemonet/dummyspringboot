@@ -83,10 +83,9 @@ jobs:
 
           touch index.html
           echo "<h1>Test Results</h1>" >> index.html
-          cat ./results/TEST-*.xml >> index.html
+          cat ${{ github.workspace }}/target/site/jacoco/jacoco.xml >> index.html
       
-          echo " ${{ github.workspace }}/ contains:"
-          ls -la  ${{ github.workspace }}/
+          echo " ${{ github.workspace }}/target/site/jacoco/jacoco.xml contains:"
           ls -la  ${{ github.workspace }}/target/site/jacoco/
           mv index.html ./results
 

@@ -64,7 +64,7 @@ jobs:
 
       - name: Makey JaCoCo Report
         uses: madrapps/jacoco-report@v1.7.1 # v1.6.1
-        if: success()  # run only if previous steps succeeded and it is a PR
+        if: success()
         with:
           paths: ${{ github.workspace }}/testCoverage.xml
           token: ${{ secrets.GITHUB_TOKEN }}

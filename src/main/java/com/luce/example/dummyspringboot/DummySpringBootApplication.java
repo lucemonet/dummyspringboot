@@ -12,6 +12,7 @@ public class DummySpringBootApplication {
     }
 
     public Double calculateRadius(Double radius) {
+        System.out.println("Calculating area of circle with radius: " + radius);
         return Math.PI * radius * radius;
     }
 }

@@ -66,7 +66,7 @@ jobs:
         uses: madrapps/jacoco-report@v1.7.1 # v1.6.1
         if: success()
         with:
-          paths: ${{ github.workspace }}/**/testCoverage.xml
+          paths: ${{ github.workspace }}/**/testCoverage-*.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           title: 🤖 Java Code Coverage
           min-coverage-overall: ${{ env.min-coverage-overall }}

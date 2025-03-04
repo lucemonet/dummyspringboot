@@ -77,8 +77,8 @@ jobs:
       - name: Generate JaCoCo Badge
         uses: cicirello/jacoco-badge-generator@v2
         with:
-            jacoco-csv-file: ${{ github.workspace }}/target/site/jacoco/jacoco.csv
-            badges-directory: ${{ github.workspace }}/target/site/jacoco/
+            jacoco-csv-file: target/site/jacoco/jacoco.csv
+            badges-directory: target/site/jacoco/
 
       - name: Package relevant files
         run: |

@@ -54,14 +54,6 @@ jobs:
           PACKAGES_USER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn --settings ${{ env.maven-settings-file-path }} clean verify --no-transfer-progress
 
-      - name: Generate JUnit Tests Report
-        uses: dorny/test-reporter@afe6793191b75b608954023a46831a3fe10048d4 # v1.7.0
-        if: success()
-        with:
-          name: JUnit Tests Report
-          path: "**/target/**/TEST-*.xml"
-          reporter: java-junit
-
       - name: Makey JaCoCo Report
         uses: madrapps/jacoco-report@v1.7.1 # v1.6.1
         if: success()

@@ -1,0 +1,15 @@
+name: Generate coverage report
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+
+  report-to-pages: #
+    uses: equinor/liquids-infrastructure/.github/workflows/coverage-pages.yml@feature/coverage-to-pages
+    with:
+      java-version: 21
+      packages-user-name: ${{ vars.PACKAGES_USER_NAME }}
+    secrets:
+      packages-user-token: ${{ secrets.PACKAGES_USER_TOKEN }}

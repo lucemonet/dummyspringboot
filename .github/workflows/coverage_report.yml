@@ -76,7 +76,6 @@ jobs:
         run: |
           pwd
           mkdir results
-          find . -name TEST-*.xml -exec cp {} ./results \;
       
           cp -R ${{ github.workspace }}/target/site/jacoco/* ./results
           echo " results contains:"

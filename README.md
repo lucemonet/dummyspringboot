@@ -1,3 +1,3 @@
   <h3 align="center">Welcome to DummySpringBoot repository</h3>
 
-[![Test Coverage](https://lucemonet.github.io/dummyspringboot/jacoco.svg)](https://lucemonet.github.io/dummyspringboot/)
+[![Test Coverage](https://equinor.github.io/dummyspringboot/jacoco.svg)](https://equinor.github.io/dummyspringboot/)
